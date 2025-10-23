@@ -13,7 +13,7 @@ public class AuthController {
     public AuthController(AuthService authService) { this.authService = authService; }
 
     @PostMapping("/register")
-    public AuthResponse register(@RequestBody AuthRequest request) {
+    public String register(@RequestBody AuthRequest request) {
         return authService.register(request);
     }
 

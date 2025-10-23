@@ -1,6 +1,7 @@
 package org.example.back.strategy;
 
 import org.example.back.dtos.CandidatureDTO;
+import org.example.back.enums.Status;
 import org.example.back.mappers.CandidatureMapper;
 import org.example.back.models.Candidature;
 import org.example.back.models.User;
@@ -34,7 +35,7 @@ public class DefaultCandidatureProcessor extends CandidatureProcessor {
         Candidature candidature = mapper.toEntity(dto);
         candidature.setUser(user);
         candidature.setDateApplied(LocalDate.now());
-        candidature.setStatus("ENVOYÉ");
+        candidature.setStatus(Status.valueOf("ENVOYÉ"));
         return candidature;
     }
 

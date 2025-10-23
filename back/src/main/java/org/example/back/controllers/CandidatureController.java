@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/candidatures")
-@RequiredArgsConstructor
 public class CandidatureController {
 
     private final DefaultCandidatureProcessor processor;
     private final CandidatureService service;
 
+    public CandidatureController( CandidatureService service, DefaultCandidatureProcessor processor) {
+        this.service = service;
+        this.processor = processor;
+    }
 
     @PutMapping("/{id}/status")
     public ResponseEntity<String> updateStatus(@PathVariable Long id, @RequestParam String status) {

@@ -18,6 +18,6 @@ public class EmailNotificationObserver implements CandidatureObserver {
         String email = candidature.getUser().getEmail();
         String message = "Status for your application to " + candidature.getCompany() +
                 " changed to " + candidature.getStatus();
-        notificationService.sendNotification(email, message);
+        notificationService.notifyUser(email, message);
     }
 }

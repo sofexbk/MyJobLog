@@ -27,15 +27,16 @@ public class AuthService {
         this.jwtService = jwtService;
     }
 
-    public AuthResponse register(AuthRequest request) {
+    public String register(AuthRequest request) {
+        if (repo.findByEmail(request.getEmail()).isPresent()) {
+            throw new RuntimeException("Email already exists");
+        }
         User user = new User();
         user.setEmail(request.getEmail());
         user.setPassword(encoder.encode(request.getPassword()));
         user.setRole(Role.USER);
         repo.save(user);
-
-        String token = jwtService.generateToken(user.getEmail(), user.getRole().name());
-        return new AuthResponse(token, user.getEmail(), user.getRole().name());
+        return "Inscription réussie. Vous pouvez maintenant vous connecter.";
     }
 
     public AuthResponse login(AuthRequest request) {
