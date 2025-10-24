@@ -9,6 +9,8 @@ import org.example.back.repositories.UserRepository;
 import org.example.back.security.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +49,16 @@ public class AuthService {
         User user = repo.findByEmail(request.getEmail()).orElseThrow();
         String token = jwtService.generateToken(user.getEmail(), user.getRole().name());
         return new AuthResponse(token, user.getEmail(), user.getRole().name());
+    }
+
+
+    public User getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || auth.getName() == null) {
+            throw new RuntimeException("Utilisateur non authentifié");
+        }
+
+        return repo.findByEmail(auth.getName())
+                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
     }
 }
