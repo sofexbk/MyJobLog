@@ -35,7 +35,7 @@ public class DefaultCandidatureProcessor extends CandidatureProcessor {
         Candidature candidature = mapper.toEntity(dto);
         candidature.setUser(user);
         candidature.setDateApplied(LocalDate.now());
-        candidature.setStatus(Status.valueOf("ENVOYÉ"));
+        candidature.setStatus(Status.ENVOYE);
         return candidature;
     }
 

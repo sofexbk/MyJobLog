@@ -1,5 +1,6 @@
 package org.example.back.services;
 
+import org.example.back.enums.Role;
 import org.example.back.events.CandidatureObserver;
 import org.example.back.enums.Status;
 import org.example.back.models.Candidature;
@@ -40,7 +41,7 @@ public class CandidatureService {
     public Candidature create(Candidature c, User user) {
         c.setUser(user);
         c.setDateApplied(LocalDate.now());
-        c.setStatus(Status.ENVOYÉ);
+        c.setStatus(Status.ENVOYE);
         return repo.save(c);
     }
 
@@ -73,5 +74,34 @@ public class CandidatureService {
             throw new RuntimeException("Not authorized to delete this candidature");
         repo.delete(c);
     }
+
+    public void updateStatus(Long id, String newStatus, User currentUser) {
+        Candidature candidature = repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Candidature not found"));
+
+        boolean isOwner = candidature.getUser().getId().equals(currentUser.getId());
+        boolean isAdmin = Role.ADMIN.equals(currentUser.getRole());
+
+        if (!isOwner && !isAdmin) {
+            throw new RuntimeException("Forbidden: You cannot change this status");
+        }
+
+        List<Status> allowedStatuses = List.of(Status.ACCEPTE, Status.ENTRETIEN, Status.REFUSE);
+
+        Status statusEnum;
+        try {
+            statusEnum = Status.valueOf(newStatus.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid status: " + newStatus);
+        }
+
+        if (!allowedStatuses.contains(statusEnum)) {
+            throw new RuntimeException("This status cannot be set manually");
+        }
+
+        candidature.setStatus(statusEnum);
+        repo.save(candidature);
+    }
+
 
 }

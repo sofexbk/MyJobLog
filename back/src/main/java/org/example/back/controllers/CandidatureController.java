@@ -60,4 +60,15 @@ public class CandidatureController {
         service.delete(id, user);
         return ResponseEntity.ok("Candidature supprimée");
     }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<String> updateStatus(
+            @PathVariable Long id,
+            @RequestParam String status
+    ) {
+        User currentUser = authService.getCurrentUser();
+        service.updateStatus(id, status, currentUser);
+        return ResponseEntity.ok("Status updated to " + status);
+    }
+
 }
