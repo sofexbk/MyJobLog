@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import api from "@/lib/axios";
+import api from "@/app/lib/axios";
 
 export default function AdminPage() {
   const [allCandidatures, setAllCandidatures] = useState([]);
