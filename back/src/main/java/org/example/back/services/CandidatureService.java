@@ -56,9 +56,6 @@ public class CandidatureService {
     public Candidature update(Long id, Candidature newData, User user) {
         Candidature c = repo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Candidature not found"));
-        if (!c.getUser().equals(user))
-            throw new RuntimeException("Not authorized to update this candidature");
-
         c.setTitle(newData.getTitle());
         c.setCompany(newData.getCompany());
         c.setLink(newData.getLink());

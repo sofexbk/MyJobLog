@@ -1,6 +1,7 @@
 package org.example.back.mappers;
 
 import org.example.back.dtos.CandidatureDTO;
+import org.example.back.enums.Status;
 import org.example.back.models.Candidature;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,13 @@ public class CandidatureMapper {
         c.setCompany(dto.getCompany());
         c.setLink(dto.getLink());
         c.setNote(dto.getNote());
+        if (dto.getStatus() != null && !dto.getStatus().isEmpty()) {
+            try {
+                c.setStatus(Status.valueOf(dto.getStatus().toUpperCase()));
+            } catch (IllegalArgumentException e) {
+                c.setStatus(Status.ENVOYE);
+            }
+        }
         return c;
     }
 
@@ -21,7 +29,7 @@ public class CandidatureMapper {
         dto.setId(c.getId());
         dto.setTitle(c.getTitle());
         dto.setCompany(c.getCompany());
-        dto.setStatus(String.valueOf(c.getStatus()));
+        dto.setStatus(c.getStatus() != null ? c.getStatus().name() : "ENVOYE");
         dto.setLink(c.getLink());
         dto.setNote(c.getNote());
         dto.setDateApplied(c.getDateApplied());

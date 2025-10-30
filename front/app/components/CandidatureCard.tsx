@@ -19,9 +19,9 @@ export default function CandidatureCard({
 }: Props) {
   const getStatusColor = (status: string) => {
     const colors: Record<string, string> = {
-      EN_ATTENTE: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-      ACCEPTEE: 'bg-green-100 text-green-800 border-green-200',
-      REFUSEE: 'bg-red-100 text-red-800 border-red-200',
+      ENVOYE: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+      ACCEPTE: 'bg-green-100 text-green-800 border-green-200',
+      REFUSE: 'bg-red-100 text-red-800 border-red-200',
       ENTRETIEN: 'bg-blue-100 text-blue-800 border-blue-200',
     };
     return colors[status] || 'bg-gray-100 text-gray-800 border-gray-200';
@@ -29,9 +29,9 @@ export default function CandidatureCard({
 
   const getStatusLabel = (status: string) => {
     const labels: Record<string, string> = {
-      EN_ATTENTE: 'En attente',
-      ACCEPTEE: 'Acceptée',
-      REFUSEE: 'Refusée',
+      ENVOYE: 'En attente',
+      ACCEPTE: 'Acceptée',
+      REFUSE: 'Refusée',
       ENTRETIEN: 'Entretien',
     };
     return labels[status] || status;
@@ -75,10 +75,10 @@ export default function CandidatureCard({
             onChange={(e) => onStatusChange(candidature.id!, e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="EN_ATTENTE">En attente</option>
+            <option value="ENVOYE">En attente</option>
             <option value="ENTRETIEN">Entretien</option>
-            <option value="ACCEPTEE">Acceptée</option>
-            <option value="REFUSEE">Refusée</option>
+            <option value="ACCEPTE">Acceptée</option>
+            <option value="REFUSE">Refusée</option>
           </select>
         </div>
       )}

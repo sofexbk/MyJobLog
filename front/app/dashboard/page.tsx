@@ -126,7 +126,7 @@ function DashboardContent() {
       enAttente: candidatures.filter(c => c.status === 'EN_ATTENTE').length,
       entretien: candidatures.filter(c => c.status === 'ENTRETIEN').length,
       acceptees: candidatures.filter(c => c.status === 'ACCEPTEE').length,
-      refusees: candidatures.filter(c => c.status === 'REFUSEE').length,
+      refusees: candidatures.filter(c => c.status === 'REFUSE').length,
     };
   };
 
@@ -221,7 +221,7 @@ function DashboardContent() {
                 <option value="EN_ATTENTE">⏳ En attente</option>
                 <option value="ENTRETIEN">💼 Entretien</option>
                 <option value="ACCEPTEE">✅ Acceptée</option>
-                <option value="REFUSEE">❌ Refusée</option>
+                <option value="REFUSE">❌ Refusée</option>
               </select>
             </div>
           </div>

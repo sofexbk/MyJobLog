@@ -68,7 +68,7 @@ export default function CandidatureModal({
               <option value="EN_ATTENTE">En attente</option>
               <option value="ENTRETIEN">Entretien</option>
               <option value="ACCEPTEE">Acceptée</option>
-              <option value="REFUSEE">Refusée</option>
+              <option value="REFUSE">Refusée</option>
             </select>
           </div>
 
