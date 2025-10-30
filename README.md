@@ -50,7 +50,7 @@ Une application full-stack moderne pour suivre et gérer vos candidatures d'empl
 ┌─────────────────┐         ┌─────────────────┐         ┌─────────────────┐
 │   Frontend      │         │    Backend      │         │   Database      │
 │   (Next.js)     │◄───────►│  (Spring Boot)  │◄───────►│  (Mysql)   │
-│   Port: 3000    │   HTTP  │   Port: 8080    │   JDBC  │   Port: 5432    │
+│   Port: 3000    │   HTTP  │   Port: 8080    │   JDBC  │   Port: 3306    │
 └─────────────────┘         └─────────────────┘         └─────────────────┘
 ```
 
@@ -117,7 +117,7 @@ Créez le fichier `src/main/resources/application.properties` :
 
 ```properties
 # Database Configuration
-spring.datasource.url=jdbc:mysql://localhost:3066/candidature_db
+spring.datasource.url=jdbc:mysql://localhost:3306/candidature_db
 spring.datasource.username=candidature_user
 spring.datasource.password=votre_password
 spring.jpa.hibernate.ddl-auto=update
