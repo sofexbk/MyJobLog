@@ -8,6 +8,7 @@ interface AuthContextType {
   user: User | null;
   loading: boolean;
   checkAuth: () => void;
+  register: (email: string, password: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -27,13 +28,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setLoading(false);
   }, []);
 
+  const register = async (email: string, password: string) => {
+    try {
+      const res = await fetch("http://localhost:8080/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Erreur lors de l'inscription");
+      }
+
+      const data = await res.json();
+
+      localStorage.setItem("token", data.token);
+
+      checkAuth(); 
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     const timeout = setTimeout(checkAuth, 0);
     return () => clearTimeout(timeout);
   }, [checkAuth]);
 
   return (
-    <AuthContext.Provider value={{ user, loading, checkAuth }}>
+    <AuthContext.Provider value={{ user, loading, checkAuth, register }}>
       {children}
     </AuthContext.Provider>
   );

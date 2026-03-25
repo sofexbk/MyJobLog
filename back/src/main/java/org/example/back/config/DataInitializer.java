@@ -26,7 +26,6 @@ public class DataInitializer {
                     .role(Role.ADMIN)
                     .build();
             repo.save(admin);
-            System.out.println("✅ Admin inserted: admin@myjoblog.com / admin123");
         }
     }
 }
