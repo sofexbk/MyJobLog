@@ -1,5 +1,5 @@
 package org.example.back.enums;
 
 public enum Status {
-    ENVOYE, ENTRETIEN, REFUSE, ACCEPTE
+    EN_ATTENTE, ENTRETIEN, REFUSE, ACCEPTE
 }

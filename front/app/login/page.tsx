@@ -113,7 +113,7 @@ export default function Login() {
                   Inscription...
                 </span>
               ) : (
-                'S\'inscrire'
+                'Se connecter'
               )}
             </button>
           </div>

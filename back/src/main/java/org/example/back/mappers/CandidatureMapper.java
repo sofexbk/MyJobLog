@@ -18,7 +18,7 @@ public class CandidatureMapper {
             try {
                 c.setStatus(Status.valueOf(dto.getStatus().toUpperCase()));
             } catch (IllegalArgumentException e) {
-                c.setStatus(Status.ENVOYE);
+                c.setStatus(Status.EN_ATTENTE);
             }
         }
         return c;
