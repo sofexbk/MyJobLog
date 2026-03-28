@@ -3,6 +3,8 @@ package org.example.back.services;
 import org.example.back.enums.Role;
 import org.example.back.events.CandidatureObserver;
 import org.example.back.enums.Status;
+import org.example.back.exceptions.CandidatureNotFoundException;
+import org.example.back.exceptions.UnauthorizedException;
 import org.example.back.models.Candidature;
 import org.example.back.models.User;
 import org.example.back.repositories.CandidatureRepository;
@@ -23,7 +25,7 @@ public class CandidatureService {
     }
 
     public void updateStatus(Long id, String status) {
-        Candidature c = repo.findById(id).orElseThrow(() -> new RuntimeException("Candidature not found"));
+        Candidature c = repo.findById(id).orElseThrow(() -> new CandidatureNotFoundException("Candidature not found"));
 
         Status newStatus;
         try {
@@ -41,7 +43,7 @@ public class CandidatureService {
     public Candidature create(Candidature c, User user) {
         c.setUser(user);
         c.setDateApplied(LocalDate.now());
-        c.setStatus(Status.ENVOYE);
+        c.setStatus(Status.EN_ATTENTE);
         return repo.save(c);
     }
 
@@ -55,7 +57,7 @@ public class CandidatureService {
 
     public Candidature update(Long id, Candidature newData, User user) {
         Candidature c = repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Candidature not found"));
+                .orElseThrow(() -> new CandidatureNotFoundException("Candidature not found"));
         c.setTitle(newData.getTitle());
         c.setCompany(newData.getCompany());
         c.setLink(newData.getLink());
@@ -66,7 +68,7 @@ public class CandidatureService {
 
     public void delete(Long id, User user) {
         Candidature c = repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Candidature not found"));
+                .orElseThrow(() -> new CandidatureNotFoundException("Candidature not found"));
         if (!c.getUser().equals(user))
             throw new RuntimeException("Not authorized to delete this candidature");
         repo.delete(c);
@@ -74,13 +76,13 @@ public class CandidatureService {
 
     public void updateStatus(Long id, String newStatus, User currentUser) {
         Candidature candidature = repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Candidature not found"));
+                .orElseThrow(() -> new CandidatureNotFoundException("Candidature not found"));
 
         boolean isOwner = candidature.getUser().getId().equals(currentUser.getId());
         boolean isAdmin = Role.ADMIN.equals(currentUser.getRole());
 
         if (!isOwner && !isAdmin) {
-            throw new RuntimeException("Forbidden: You cannot change this status");
+            throw new UnauthorizedException("Forbidden: You cannot change this status");
         }
 
         List<Status> allowedStatuses = List.of(Status.ACCEPTE, Status.ENTRETIEN, Status.REFUSE);

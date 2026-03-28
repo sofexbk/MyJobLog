@@ -140,7 +140,7 @@ function DashboardContent() {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <h1 className="text-2xl font-bold text-gray-900">
-                📋 Mes Candidatures
+                Mes Candidatures
               </h1>
             </div>
             <div className="flex items-center space-x-4">
@@ -159,7 +159,7 @@ function DashboardContent() {
                 onClick={() => authService.logout()}
                 className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors text-sm font-medium"
               >
-                🚪 Déconnexion
+                 Déconnexion
               </button>
             </div>
           </div>
@@ -201,7 +201,7 @@ function DashboardContent() {
                 onClick={() => { resetForm(); setShowModal(true); }}
                 className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 font-medium transition-colors flex items-center justify-center"
               >
-                ➕ Nouvelle Candidature
+                Nouvelle Candidature
               </button>
 
               <input
@@ -217,11 +217,11 @@ function DashboardContent() {
                 onChange={(e) => setFilterStatus(e.target.value)}
                 className="px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                <option value="ALL">📊 Tous les statuts</option>
-                <option value="EN_ATTENTE">⏳ En attente</option>
-                <option value="ENTRETIEN">💼 Entretien</option>
-                <option value="ACCEPTEE">✅ Acceptée</option>
-                <option value="REFUSE">❌ Refusée</option>
+                <option value="ALL">Tous les statuts</option>
+                <option value="EN_ATTENTE"> En attente</option>
+                <option value="ENTRETIEN"> Entretien</option>
+                <option value="ACCEPTEE"> Acceptée</option>
+                <option value="REFUSE"> Refusée</option>
               </select>
             </div>
           </div>

@@ -29,7 +29,7 @@ public class CandidatureMapper {
         dto.setId(c.getId());
         dto.setTitle(c.getTitle());
         dto.setCompany(c.getCompany());
-        dto.setStatus(c.getStatus() != null ? c.getStatus().name() : "ENVOYE");
+        dto.setStatus(c.getStatus() != null ? c.getStatus().name() : "EN_ATTENTE");
         dto.setLink(c.getLink());
         dto.setNote(c.getNote());
         dto.setDateApplied(c.getDateApplied());
