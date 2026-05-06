@@ -43,7 +43,11 @@ public class CandidatureService {
     public Candidature create(Candidature c, User user) {
         c.setUser(user);
         c.setDateApplied(LocalDate.now());
-        c.setStatus(Status.EN_ATTENTE);
+
+        if (c.getStatus() == null) {
+            c.setStatus(Status.EN_ATTENTE);
+        }
+
         return repo.save(c);
     }
 
